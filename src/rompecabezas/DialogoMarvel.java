@@ -13,7 +13,7 @@ public class DialogoMarvel extends javax.swing.JDialog {
     /**
      * Creates new form DialogoMarvel
      */
-    public DialogoMarvel(java.awt.Frame parent, boolean modal) {
+    public DialogoMarvel(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

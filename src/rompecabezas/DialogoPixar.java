@@ -13,7 +13,7 @@ public class DialogoPixar extends javax.swing.JDialog {
     /**
      * Creates new form DialogoPixarGeneral
      */
-    public DialogoPixar(java.awt.Frame parent, boolean modal) {
+    public DialogoPixar(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

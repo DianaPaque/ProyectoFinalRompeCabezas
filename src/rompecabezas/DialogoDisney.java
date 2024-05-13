@@ -15,7 +15,7 @@ public class DialogoDisney extends javax.swing.JDialog {
     /**
      * Creates new form DialogoDisneyGeneral
      */
-    public DialogoDisney(java.awt.Frame parent, boolean modal) {
+    public DialogoDisney(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }

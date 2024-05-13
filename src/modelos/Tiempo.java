@@ -55,4 +55,11 @@ public class Tiempo {
 
     return tiempoTotalEnSegundos;
     }
+    
+    public String obtenerTiempoFormateado() {
+        int minutos = segundos / 60;
+        int segundosRestantes = segundos % 60;
+        return String.format("%d:%02d", minutos, segundosRestantes);
+    }
+
 }
