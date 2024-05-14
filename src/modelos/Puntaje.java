@@ -4,12 +4,15 @@
  */
 package modelos;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author usuario
  */
 public class Puntaje {
     private int puntajeActual;
+    private JLabel label;
 
     public Puntaje() {
         this.puntajeActual = 0;
@@ -24,7 +27,7 @@ public class Puntaje {
     
     public int calcularPuntajeActual(){
         
-        Tiempo t = new Tiempo();
+        Tiempo t = new Tiempo(label);
         
         if(t.obtenerTiempo() <= 60){
             this.puntajeActual += 100;

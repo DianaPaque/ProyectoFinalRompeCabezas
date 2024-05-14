@@ -35,6 +35,7 @@ public class DialogoMarvel extends javax.swing.JDialog {
         bContinuar = new javax.swing.JButton();
         tTiempo = new javax.swing.JTextField();
         tPuntaje = new javax.swing.JTextField();
+        bAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -86,6 +87,17 @@ public class DialogoMarvel extends javax.swing.JDialog {
         jPanel1.add(tTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
         jPanel1.add(tPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, -1, -1));
 
+        bAtras.setBackground(new java.awt.Color(255, 255, 153));
+        bAtras.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
+        bAtras.setForeground(new java.awt.Color(0, 0, 0));
+        bAtras.setText("Atras");
+        bAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,8 +116,14 @@ public class DialogoMarvel extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tTiempoActionPerformed
 
+    private void bAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtrasActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_bAtrasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAtras;
     private javax.swing.JButton bContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

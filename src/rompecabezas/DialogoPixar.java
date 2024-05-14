@@ -35,6 +35,7 @@ public class DialogoPixar extends javax.swing.JDialog {
         tTiempo = new javax.swing.JTextField();
         tPuntaje = new javax.swing.JTextField();
         bContinuar = new javax.swing.JButton();
+        bAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -80,6 +81,17 @@ public class DialogoPixar extends javax.swing.JDialog {
         bContinuar.setText("Continuar");
         jPanel2.add(bContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
 
+        bAtras.setBackground(new java.awt.Color(102, 102, 255));
+        bAtras.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
+        bAtras.setForeground(new java.awt.Color(0, 0, 0));
+        bAtras.setText("Atras");
+        bAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAtrasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(bAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,9 +106,15 @@ public class DialogoPixar extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtrasActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_bAtrasActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAtras;
     private javax.swing.JButton bContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

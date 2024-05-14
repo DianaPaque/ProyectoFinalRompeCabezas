@@ -92,6 +92,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void bAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAcercadeActionPerformed
         // TODO add your handling code here:
+        DialogoAcercaDelJuego d2 = new DialogoAcercaDelJuego(this, true);
+        d2.setVisible(true);
     }//GEN-LAST:event_bAcercadeActionPerformed
 
     /**

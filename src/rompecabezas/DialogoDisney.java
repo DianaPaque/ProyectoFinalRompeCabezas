@@ -5,6 +5,8 @@
 package rompecabezas;
 
 import java.awt.Color;
+import modelos.Panel;
+import modelos.Tiempo;
 
 /**
  *
@@ -18,6 +20,9 @@ public class DialogoDisney extends javax.swing.JDialog {
     public DialogoDisney(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        Panel miPanel = new Panel();
+        add(miPanel);
     }
 
     /**
@@ -35,8 +40,9 @@ public class DialogoDisney extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         bContinuar = new javax.swing.JButton();
-        tTiempo = new javax.swing.JTextField();
         tPuntaje = new javax.swing.JTextField();
+        bAtras = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -56,11 +62,11 @@ public class DialogoDisney extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 520, 240));
@@ -80,14 +86,19 @@ public class DialogoDisney extends javax.swing.JDialog {
         bContinuar.setForeground(new java.awt.Color(0, 0, 0));
         bContinuar.setText("Continuar");
         jPanel2.add(bContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 130, -1));
+        jPanel2.add(tPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
 
-        tTiempo.addActionListener(new java.awt.event.ActionListener() {
+        bAtras.setBackground(new java.awt.Color(185, 169, 169));
+        bAtras.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
+        bAtras.setForeground(new java.awt.Color(0, 0, 0));
+        bAtras.setText("Atras");
+        bAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tTiempoActionPerformed(evt);
+                bAtrasActionPerformed(evt);
             }
         });
-        jPanel2.add(tTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
-        jPanel2.add(tPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
+        jPanel2.add(bAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,19 +114,21 @@ public class DialogoDisney extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tTiempoActionPerformed
+    private void bAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAtrasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tTiempoActionPerformed
+        dispose();
+    }//GEN-LAST:event_bAtrasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAtras;
     private javax.swing.JButton bContinuar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField tPuntaje;
-    private javax.swing.JTextField tTiempo;
     private javax.swing.JLabel tTitulo;
     // End of variables declaration//GEN-END:variables
 }

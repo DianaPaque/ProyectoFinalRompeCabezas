@@ -53,21 +53,20 @@ public class Panel  extends JPanel{
         }
 
     }
-    
-    /*
-    public void draw(Graphics g){
+
+    public void drawR(Graphics g){
         int iter = 0;
         long seed = System.nanoTime();
             Collections.shuffle(piezas, new Random(seed));
-        for (int i = 0; i < 5; i++){
-            for (int j = 0; j < 5; j++){
-                g.drawImage(piezas.get(iter), i * (width / 5), j * (height / 5), null);
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                g.drawImage((Image) piezas.iterator(), i * (width / 3), j * (height / 3), null);
                 iter++;
             }
         }
     }
-    */
-    
+
+
     public void draw(Graphics g){
         for(ArrayList<Pieza> piezas : piezas){
             for(Pieza pieza : piezas){
@@ -75,6 +74,5 @@ public class Panel  extends JPanel{
             }
         }
     }
-    
     
 }

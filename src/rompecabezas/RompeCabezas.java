@@ -26,19 +26,19 @@ import javax.swing.JPanel;
 public class RompeCabezas{
     private Tiempo tiempoJuego;
     private int puntajeT;
-    private ArrayList<ArrayList<Pieza>> piezas;
+    //private ArrayList<ArrayList<Pieza>> piezas;
     private ArrayList<Puntaje> puntaje1;
-    private BufferedImage imagen1;
-    private int width, height;
+    //private BufferedImage imagen1;
+    //private int width, height;
 
     public RompeCabezas() {
         this.tiempoJuego = tiempoJuego;
         this.puntajeT = 0;
-        this.piezas = new ArrayList<ArrayList<Pieza>>();
+        //this.piezas = new ArrayList<ArrayList<Pieza>>();
         this.puntaje1 = new ArrayList<>();
-        this.imagen1 = imagen1;
-        this.width = width;
-        this.height = height;
+        //this.imagen1 = imagen1;
+        //this.width = width;
+        //this.height = height;
     }
     
     public boolean iniciarJuego(){
