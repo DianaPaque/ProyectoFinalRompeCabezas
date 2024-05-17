@@ -4,6 +4,9 @@
  */
 package rompecabezas;
 
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author usuario
@@ -112,21 +115,21 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
     private void bDisneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDisneyActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoDisney d1 = new DialogoDisney(this, true);
+        DialogoTableros d1 = new DialogoTableros(this, true, "Disney", new Color(204, 204, 255), "DineyT1.jpg", new Font("Snap ITC", 0, 48));
         d1.setVisible(true);
     }//GEN-LAST:event_bDisneyActionPerformed
 
     private void bMarvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMarvelActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoMarvel d2 = new DialogoMarvel(this, true);
+        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "MarvelT1(1).jpg", new Font("Showcard Gothic", 0, 48));
         d2.setVisible(true);
     }//GEN-LAST:event_bMarvelActionPerformed
 
     private void bPixarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPixarActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoPixar d3 = new DialogoPixar(this, true);
+        DialogoTableros d3 = new DialogoTableros(this, true, "Pixar", new Color(204, 255, 204), "PixarT1.jpg", new Font("Cooper Black", 0, 48));
         d3.setVisible(true);
     }//GEN-LAST:event_bPixarActionPerformed
 

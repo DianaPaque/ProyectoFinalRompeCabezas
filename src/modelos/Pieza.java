@@ -4,6 +4,8 @@
  */
 package modelos;
 import java.awt.Color;
+import static java.awt.Event.DOWN;
+import static java.awt.Event.UP;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -14,6 +16,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import static javax.swing.JSplitPane.LEFT;
+import static javax.swing.JSplitPane.RIGHT;
 
 /**
  *
@@ -27,27 +31,50 @@ public class Pieza {
     public Pieza(Image image, int posx, int posy) {
         this.image = image;
         this.posx = posx;
-        this.posy = posy;
-        
-        
+        this.posy = posy;    
     }
     
     public void move(int code){
         if(code == KeyEvent.VK_UP){
-            posy += 20;
+            move(UP);
         }
         if(code == KeyEvent.VK_DOWN){
-            posy -= 20;
+            move(DOWN);
         }
         if(code == KeyEvent.VK_RIGHT){
-            posx += 20;
+            move(RIGHT);
         }
         if(code == KeyEvent.VK_LEFT){
-            posx -= 20;
+            move(LEFT);
         }
     }
     
     public void draw(Graphics g){
         g.drawImage(image, posx, posy, null, null);
+    }
+
+    private void move(String RIGHT) {
+        
+    }
+
+    /**
+     * @return the posx
+     */
+    public int getPosx() {
+        return posx;
+    }
+
+    /**
+     * @return the posy
+     */
+    public int getPosy() {
+        return posy;
+    }
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
     }
 }

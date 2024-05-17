@@ -2,40 +2,71 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelos;
+package presentacion;
 
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import javax.imageio.ImageIO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import modelos.Pieza;
+import rompecabezas.RompeCabezas;
 
 /**
  *
  * @author usuario
  */
-public class Panel  extends JPanel{
+public class Panel extends JPanel {
+
     private BufferedImage imagenPrincipal;
     private int width, height;
-    private ArrayList<ArrayList<Pieza>> piezas;
+    //private ArrayList<ArrayList<Pieza>> piezas;
     private BufferedImage imagen1;
+    private String imagePath;
+    private boolean listo = false;
+    private RompeCabezas rompecabezas;
 
-    public Panel() {
-        this.imagenPrincipal = imagenPrincipal;
-        this.width = width;
-        this.height = height;
-        this.piezas = new ArrayList<ArrayList<Pieza>>();
-        this.imagen1 = imagen1;
+//    public Panel() {
+//        this.imagenPrincipal = imagenPrincipal;
+//        this.width = width;
+//        this.height = height;
+//        //this.piezas = new ArrayList<ArrayList<Pieza>>();
+//        this.imagen1 = imagen1;
+//    }
+    public String getImagePath() {
+        return imagePath;
     }
 
+    public void setImagePath(String imagePath) throws IOException {
+        this.imagePath = imagePath;
+        this.rompecabezas = new RompeCabezas();
+        this.rompecabezas.cargarImagen();
+        this.listo = true;
+        repaint();
+    }
+    
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (listo) {
+            ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; i++) {
+                    RompeCabezas r = new RompeCabezas();
+                    try {
+                        r.cargarImagen();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }
+
+    /*
     public void cargarImagen() throws IOException{
         imagen1 = ImageIO.read(new File("DisneyT1.jpg"));
         width = imagen1.getWidth(null);
@@ -53,7 +84,7 @@ public class Panel  extends JPanel{
         }
 
     }
-
+    
     public void drawR(Graphics g){
         int iter = 0;
         long seed = System.nanoTime();
@@ -74,5 +105,5 @@ public class Panel  extends JPanel{
             }
         }
     }
-    
+     */
 }
