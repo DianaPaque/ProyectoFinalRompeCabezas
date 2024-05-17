@@ -16,6 +16,8 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -26,19 +28,19 @@ import javax.swing.JPanel;
 public class RompeCabezas{
     private Tiempo tiempoJuego;
     private int puntajeT;
-    //private ArrayList<ArrayList<Pieza>> piezas;
+    private ArrayList<ArrayList<Pieza>> piezas;
     private ArrayList<Puntaje> puntaje1;
-    //private BufferedImage imagen1;
-    //private int width, height;
+    private BufferedImage imagen1;
+    private int width, height;
 
     public RompeCabezas() {
         this.tiempoJuego = tiempoJuego;
         this.puntajeT = 0;
-        //this.piezas = new ArrayList<ArrayList<Pieza>>();
+        this.piezas = new ArrayList<ArrayList<Pieza>>();
         this.puntaje1 = new ArrayList<>();
-        //this.imagen1 = imagen1;
-        //this.width = width;
-        //this.height = height;
+        this.imagen1 = imagen1;
+        this.width = width;
+        this.height = height;
     }
     
     public boolean iniciarJuego(){
@@ -49,7 +51,6 @@ public class RompeCabezas{
         return true;
     }
     
-    /*
     public void cargarImagen() throws IOException{
         imagen1 = ImageIO.read(new File("DisneyT1.jpg"));
         width = imagen1.getWidth(null);
@@ -63,20 +64,11 @@ public class RompeCabezas{
                 Pieza p = new Pieza(image, j*(width/3), i * (height / 3));
                 parcial.add(p);
             }
-            piezas.add(parcial);
+            getPiezas().add(parcial);
         }
 
     }
     
-    public void draw(Graphics g){
-        for(ArrayList<Pieza> piezas : piezas){
-            for(Pieza pieza : piezas){
-              pieza.draw(g);
-            }
-        }
-    }
-    */
-
     public int calcularPuntajeTotal(){
         
         for(int i = 0; i < 3; i++){
@@ -90,5 +82,12 @@ public class RompeCabezas{
         }
         
         return puntajeT;
+    }
+
+    /**
+     * @return the piezas
+     */
+    public ArrayList<ArrayList<Pieza>> getPiezas() {
+        return piezas;
     }
 }
