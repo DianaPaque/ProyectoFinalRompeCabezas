@@ -5,6 +5,7 @@
 package presentacion;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,20 +48,39 @@ public class Panel extends JPanel {
         repaint();
     }
     
+    
+    public BufferedImage convertUsingConstructor(Image image) throws IllegalArgumentException {
+    int width = image.getWidth(null);
+    int height = image.getHeight(null);
+    if (width <= 0 || height <= 0) {
+        throw new IllegalArgumentException("Image dimensions are invalid");
+    }
+    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+    bufferedImage.getGraphics().drawImage(image, 0, 0, null);
+    return bufferedImage;
+}
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+
+
         if (listo) {
             ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; i++) {
-                    RompeCabezas r = new RompeCabezas();
-                    try {
-                        r.cargarImagen();
-                    } catch (IOException ex) {
-                        Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            for (int i = 0; i < piezas.size(); i++) {
+                for (int j = 0; j < piezas.get(i).size(); j++) {
+                    Pieza pieza = piezas.get(i).get(j);
+                    
+                    BufferedImage img = convertUsingConstructor(pieza.getImage());
+
+                            
+                    // BufferedImage img = (BufferedImage) pieza.getImage();
+                    int x = pieza.getX();
+                    int y = pieza.getY();
+                            
+  //                   if(j % 9 == 0)
+                      g.drawImage(img, x, y, this);
                 }
             }
         }

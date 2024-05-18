@@ -77,4 +77,12 @@ public class Pieza {
     public Image getImage() {
         return image;
     }
+
+    public int getX() {
+        return posx;
+    }
+
+    public int getY() {
+        return posy;
+    }
 }

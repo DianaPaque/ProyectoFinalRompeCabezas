@@ -52,7 +52,7 @@ public class RompeCabezas{
     }
     
     public void cargarImagen() throws IOException{
-        imagen1 = ImageIO.read(new File("DisneyT1.jpg"));
+        imagen1 = ImageIO.read(new File("src\\imagenesTableros\\IDisney\\DisneyT1.jpg"));
         width = imagen1.getWidth(null);
         height = imagen1.getHeight(null);     
 
