@@ -51,8 +51,8 @@ public class RompeCabezas{
         return true;
     }
     
-    public void cargarImagen() throws IOException{
-        imagen1 = ImageIO.read(new File("src\\imagenesTableros\\IDisney\\DisneyT1.jpg"));
+    public void cargarImagen(String imagePath) throws IOException{
+        imagen1 = ImageIO.read(new File(imagePath));
         width = imagen1.getWidth(null);
         height = imagen1.getHeight(null);     
 
@@ -72,7 +72,8 @@ public class RompeCabezas{
     public int calcularPuntajeTotal(){
         
         for(int i = 0; i < 3; i++){
-            Puntaje p = new Puntaje();
+            Tiempo tiempo = null;
+            Puntaje p = new Puntaje(tiempo);
             p.calcularPuntajeActual();
             puntaje1.add(p);
         }

@@ -3,43 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelos;
-import java.util.Timer;
-import java.io.IOException;
-import java.util.TimerTask;
+
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author usuario
- */
 public class Tiempo {
     private int segundos;
     private boolean corriendo;
     private JLabel label;
-    private TiempoRunnable tiempoRunnable;
     private Thread hilo;
 
     public Tiempo(JLabel label) {
         this.segundos = 0;
         this.corriendo = false;
         this.label = label;
-        this.tiempoRunnable = new TiempoRunnable(this, label);
-        this.hilo = new Thread((Runnable) tiempoRunnable);
-    }
-
-    public int getSegundos() {
-        return segundos;
+        this.hilo = new Thread(new TiempoRunnable(this));
     }
 
     public synchronized boolean iniciar() {
         if (corriendo) {
-            return false;
+            return false; // El tiempo ya está corriendo
         }
         corriendo = true;
         if (!hilo.isAlive()) {
-            hilo = new Thread((Runnable) tiempoRunnable);
             hilo.start();
+            System.out.println("Hilo del cronómetro iniciado.");
+        } else {
+            System.out.println("El hilo del cronómetro ya está en ejecución.");
         }
         return true;
     }
@@ -69,17 +59,18 @@ public class Tiempo {
         return String.format("%d:%02d", minutos, segundosRestantes);
     }
 
-    private void actualizarLabel() {
-        SwingUtilities.invokeLater(() -> label.setText(obtenerTiempoFormateado()));
+    public synchronized boolean estaCorriendo() {
+        return corriendo;
     }
 
     public synchronized void incrementarSegundos() {
         segundos++;
-        actualizarLabel();
     }
 
-    public synchronized boolean CorriendoTiempo() {
-        return corriendo;
+    void actualizarLabel() {
+        if (label != null) {
+            SwingUtilities.invokeLater(() -> label.setText(obtenerTiempoFormateado()));
+        }
     }
 }
 

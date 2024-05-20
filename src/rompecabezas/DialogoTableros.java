@@ -10,6 +10,9 @@ import java.awt.Frame;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import modelos.Puntaje;
+import modelos.Tiempo;
 
 /**
  *
@@ -20,6 +23,9 @@ public class DialogoTableros extends javax.swing.JDialog {
     private String nombre;
     private Color color;
     private String imagen;
+    private Tiempo tiempo;
+    private Puntaje puntaje;
+    private JLabel tTiempoLabel ;
 
     public DialogoTableros(java.awt.Dialog parent, boolean modal, String nombre, Color color, String imagen, Font fuente) {
         this(parent, modal);
@@ -28,6 +34,11 @@ public class DialogoTableros extends javax.swing.JDialog {
         this.imagen = imagen;
         tTitulo.setText(nombre);
         jPanel2.setBackground(color);
+        JLabel tTiempoLabel = new JLabel("0:00");
+        jPanel2.add(tTiempoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 50, -1));
+        tiempo = new Tiempo(tTiempoLabel);
+        tiempo.iniciar();
+        puntaje = new Puntaje(tiempo);
     }
     
     
@@ -43,7 +54,7 @@ public class DialogoTableros extends javax.swing.JDialog {
     
     public void crearPanel(){
         try {
-            this.panelRompe.setImagePath("pixar.jpg");
+            this.panelRompe.setImagePath("src\\imagenesTableros\\IDisney\\DisneyT1.jpg");
         } catch (IOException ex) {
             Logger.getLogger(DialogoTableros.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,7 +73,6 @@ public class DialogoTableros extends javax.swing.JDialog {
         tTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tTiempo = new javax.swing.JTextField();
         tPuntaje = new javax.swing.JTextField();
         bContinuar = new javax.swing.JButton();
         bAtras = new javax.swing.JButton();
@@ -88,7 +98,6 @@ public class DialogoTableros extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Puntaje:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
-        jPanel2.add(tTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
         jPanel2.add(tPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, -1, -1));
 
         bContinuar.setBackground(new java.awt.Color(102, 102, 255));
@@ -150,7 +159,6 @@ public class DialogoTableros extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private presentacion.Panel panelRompe;
     private javax.swing.JTextField tPuntaje;
-    private javax.swing.JTextField tTiempo;
     private javax.swing.JLabel tTitulo;
     // End of variables declaration//GEN-END:variables
 }

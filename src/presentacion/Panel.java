@@ -29,13 +29,6 @@ public class Panel extends JPanel {
     private boolean listo = false;
     private RompeCabezas rompecabezas;
 
-//    public Panel() {
-//        this.imagenPrincipal = imagenPrincipal;
-//        this.width = width;
-//        this.height = height;
-//        //this.piezas = new ArrayList<ArrayList<Pieza>>();
-//        this.imagen1 = imagen1;
-//    }
     public String getImagePath() {
         return imagePath;
     }
@@ -43,7 +36,7 @@ public class Panel extends JPanel {
     public void setImagePath(String imagePath) throws IOException {
         this.imagePath = imagePath;
         this.rompecabezas = new RompeCabezas();
-        this.rompecabezas.cargarImagen();
+        this.rompecabezas.cargarImagen(imagePath);
         this.listo = true;
         repaint();
     }
@@ -85,45 +78,4 @@ public class Panel extends JPanel {
             }
         }
     }
-
-    /*
-    public void cargarImagen() throws IOException{
-        imagen1 = ImageIO.read(new File("DisneyT1.jpg"));
-        width = imagen1.getWidth(null);
-        height = imagen1.getHeight(null);     
-
-        for(int i = 0; i < 3; i++){
-            ArrayList<Pieza>parcial = new ArrayList();
-            for (int j = 0; j  < 3; j++){
-                Image image = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(imagen1.getSource(),
-                    new CropImageFilter(j * (width / 3), i * (height / 3) , width / 3, height / 3)));
-                Pieza p = new Pieza(image, j*(width/3), i * (height / 3));
-                parcial.add(p);
-            }
-            piezas.add(parcial);
-        }
-
-    }
-    
-    public void drawR(Graphics g){
-        int iter = 0;
-        long seed = System.nanoTime();
-            Collections.shuffle(piezas, new Random(seed));
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                g.drawImage((Image) piezas.iterator(), i * (width / 3), j * (height / 3), null);
-                iter++;
-            }
-        }
-    }
-
-
-    public void draw(Graphics g){
-        for(ArrayList<Pieza> piezas : piezas){
-            for(Pieza pieza : piezas){
-              pieza.draw(g);
-            }
-        }
-    }
-     */
 }
