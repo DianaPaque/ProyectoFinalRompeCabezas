@@ -13,7 +13,7 @@ public class DialogoFinal extends javax.swing.JDialog {
     /**
      * Creates new form DialogoFinal
      */
-    public DialogoFinal(java.awt.Frame parent, boolean modal) {
+    public DialogoFinal(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -64,6 +64,11 @@ public class DialogoFinal extends javax.swing.JDialog {
 
         bReiniciar.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
         bReiniciar.setText("Reiniciar");
+        bReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bReiniciarActionPerformed(evt);
+            }
+        });
         jPanel1.add(bReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
 
         bFinalizar.setFont(new java.awt.Font("Showcard Gothic", 0, 14)); // NOI18N
@@ -93,7 +98,12 @@ public class DialogoFinal extends javax.swing.JDialog {
 
     private void bFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_bFinalizarActionPerformed
+
+    private void bReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bReiniciarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bReiniciarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

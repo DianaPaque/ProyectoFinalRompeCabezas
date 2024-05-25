@@ -51,6 +51,40 @@ public class RompeCabezas{
         return true;
     }
     
+    public void cargarImagen(String imagePath) throws IOException {
+        imagen1 = ImageIO.read(new File(imagePath));
+        width = imagen1.getWidth(null);
+        height = imagen1.getHeight(null);     
+
+        ArrayList<Pieza> piezasList = new ArrayList<>();
+
+        for(int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                Image image = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(imagen1.getSource(),
+                    new CropImageFilter(j * (width / 3), i * (height / 3), width / 3, height / 3)));
+                Pieza p = new Pieza(image, j * (width / 3), i * (height / 3));
+                piezasList.add(p);
+            }
+        }
+
+        Collections.shuffle(piezasList);
+
+        int index = 0;
+        for (int i = 0; i < 3; i++) {
+            ArrayList<Pieza> parcial = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                Pieza p = piezasList.get(index);
+                p.setPosx(j * (width / 3));
+                p.setPosy(i * (height / 3));
+                parcial.add(p);
+                index++;
+            }
+            piezas.add(parcial);
+        }
+    }
+
+    
+    /*
     public void cargarImagen(String imagePath) throws IOException{
         imagen1 = ImageIO.read(new File(imagePath));
         width = imagen1.getWidth(null);
@@ -67,6 +101,14 @@ public class RompeCabezas{
             getPiezas().add(parcial);
         }
 
+    }
+    */
+    
+    public void desordenarPiezas() {
+        for (ArrayList<Pieza> fila : piezas) {
+            Collections.shuffle(fila);
+        }
+        Collections.shuffle(piezas);
     }
     
     public int calcularPuntajeTotal(){

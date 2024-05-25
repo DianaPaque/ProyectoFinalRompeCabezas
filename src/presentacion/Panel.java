@@ -37,6 +37,7 @@ public class Panel extends JPanel {
         this.imagePath = imagePath;
         this.rompecabezas = new RompeCabezas();
         this.rompecabezas.cargarImagen(imagePath);
+        this.rompecabezas.desordenarPiezas();
         this.listo = true;
         repaint();
     }
@@ -57,24 +58,26 @@ public class Panel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
-
         if (listo) {
             ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+            int a;
+            int b;
             for (int i = 0; i < piezas.size(); i++) {
+                ArrayList<ArrayList<Pieza>> arreglo2 = new ArrayList();
                 for (int j = 0; j < piezas.get(i).size(); j++) {
                     Pieza pieza = piezas.get(i).get(j);
                     
                     BufferedImage img = convertUsingConstructor(pieza.getImage());
-
-                            
+ 
                     // BufferedImage img = (BufferedImage) pieza.getImage();
                     int x = pieza.getX();
                     int y = pieza.getY();
                             
   //                   if(j % 9 == 0)
                       g.drawImage(img, x, y, this);
+                      System.out.println(j);
                 }
+                System.out.println(i);
             }
         }
     }

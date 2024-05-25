@@ -122,7 +122,7 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
     private void bMarvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMarvelActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT1(1).jpg", new Font("Showcard Gothic", 0, 48));
+        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT1.jpg", new Font("Showcard Gothic", 0, 48));
         d2.setVisible(true);
     }//GEN-LAST:event_bMarvelActionPerformed
 

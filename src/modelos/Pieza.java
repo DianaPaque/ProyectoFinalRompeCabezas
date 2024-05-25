@@ -85,4 +85,20 @@ public class Pieza {
     public int getY() {
         return posy;
     }
+
+    /**
+     * @param posx the posx to set
+     */
+    public void setPosx(int posx) {
+        this.posx = posx;
+    }
+
+    /**
+     * @param posy the posy to set
+     */
+    public void setPosy(int posy) {
+        this.posy = posy;
+    }
+
+   
 }

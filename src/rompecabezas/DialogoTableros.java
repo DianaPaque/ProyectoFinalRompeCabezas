@@ -28,7 +28,10 @@ public class DialogoTableros extends javax.swing.JDialog {
     private JLabel tTiempoLabel ;
 
     public DialogoTableros(java.awt.Dialog parent, boolean modal, String nombre, Color color, String imagen, Font fuente) {
-        this(parent, modal);
+        super(parent, modal);
+        initComponents();
+        crearPanel(imagen);
+        System.out.println(imagen);
         this.nombre = nombre;
         this.color = color;
         this.imagen = imagen;
@@ -46,15 +49,19 @@ public class DialogoTableros extends javax.swing.JDialog {
     /**
      * Creates new form DialogoPixarGeneral
      */
+    
+    /*
     public DialogoTableros(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         crearPanel();
     }
+    */
     
-    public void crearPanel(){
+    public void crearPanel(String imagen){
         try {
-            this.panelRompe.setImagePath("src\\imagenesTableros\\IDisney\\DisneyT1.jpg");
+            // this.panelRompe.setImagePath("src\\imagenesTableros\\IDisney\\DisneyT1.jpg");
+            this.panelRompe.setImagePath(imagen);
         } catch (IOException ex) {
             Logger.getLogger(DialogoTableros.class.getName()).log(Level.SEVERE, null, ex);
         }
