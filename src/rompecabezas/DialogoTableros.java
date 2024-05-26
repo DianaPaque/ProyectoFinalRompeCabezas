@@ -111,6 +111,11 @@ public class DialogoTableros extends javax.swing.JDialog {
         bContinuar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
         bContinuar.setForeground(new java.awt.Color(0, 0, 0));
         bContinuar.setText("Continuar");
+        bContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bContinuarActionPerformed(evt);
+            }
+        });
         jPanel2.add(bContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
 
         bAtras.setBackground(new java.awt.Color(102, 102, 255));
@@ -155,6 +160,12 @@ public class DialogoTableros extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_bAtrasActionPerformed
+
+    private void bContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuarActionPerformed
+        // TODO add your handling code here:
+        DialogoFinal df = new DialogoFinal(this, true);
+        df.setVisible(true);
+    }//GEN-LAST:event_bContinuarActionPerformed
 
 
 

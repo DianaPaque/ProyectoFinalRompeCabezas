@@ -52,9 +52,10 @@ public class RompeCabezas{
     }
     
     public void cargarImagen(String imagePath) throws IOException {
-        imagen1 = ImageIO.read(new File(imagePath));
-        width = imagen1.getWidth(null);
-        height = imagen1.getHeight(null);     
+        BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
+        imagen1 = bufferedImage;
+        width = bufferedImage.getWidth();
+        height = bufferedImage.getHeight();     
 
         ArrayList<Pieza> piezasList = new ArrayList<>();
 

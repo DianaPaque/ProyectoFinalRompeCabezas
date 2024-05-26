@@ -34,27 +34,8 @@ public class Pieza {
         this.posy = posy;    
     }
     
-    public void move(int code){
-        if(code == KeyEvent.VK_UP){
-            move(UP);
-        }
-        if(code == KeyEvent.VK_DOWN){
-            move(DOWN);
-        }
-        if(code == KeyEvent.VK_RIGHT){
-            move(RIGHT);
-        }
-        if(code == KeyEvent.VK_LEFT){
-            move(LEFT);
-        }
-    }
-    
     public void draw(Graphics g){
         g.drawImage(image, posx, posy, null, null);
-    }
-
-    private void move(String RIGHT) {
-        
     }
 
     /**
@@ -100,5 +81,4 @@ public class Pieza {
         this.posy = posy;
     }
 
-   
 }
