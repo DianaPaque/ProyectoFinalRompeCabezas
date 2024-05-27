@@ -67,7 +67,7 @@ public class Tiempo {
         segundos++;
     }
 
-    void actualizarLabel() {
+    public void actualizarLabel() {
         if (label != null) {
             SwingUtilities.invokeLater(() -> label.setText(obtenerTiempoFormateado()));
         }

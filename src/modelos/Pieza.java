@@ -27,11 +27,15 @@ public class Pieza {
     private int posx;
     private int posy;
     private Image image;
+    private int height;
+    private int width;
 
-    public Pieza(Image image, int posx, int posy) {
-        this.image = image;
+    public Pieza(Image image, int posx, int posy, int height, int width) {
         this.posx = posx;
-        this.posy = posy;    
+        this.posy = posy;
+        this.image = image;
+        this.height = height;
+        this.width = width;
     }
     
     public void draw(Graphics g){
@@ -79,6 +83,32 @@ public class Pieza {
      */
     public void setPosy(int posy) {
         this.posy = posy;
+    }
+    
+     /**
+     * @return the height
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * @return the widht
+     */
+    public int getWidth() {
+        return width;
+    }
+    
+    public void move(){
+        
+    }
+    
+    public void rotar(){
+        
+    }
+    
+    public boolean checkHit(int x, int y) {
+        return x >= this.getX() && x <= this.getX() + this.getWidth() && y >= this.getY() && y <= this.getY() + this.getHeight();
     }
 
 }

@@ -7,6 +7,7 @@ package rompecabezas;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import modelos.Tiempo;
 import modelos.Puntaje;
 import java.util.ArrayList;
@@ -14,12 +15,12 @@ import modelos.Pieza;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 /**
  *
@@ -50,7 +51,7 @@ public class RompeCabezas{
     public boolean resolverRompecabezas(){
         return true;
     }
-    
+
     public void cargarImagen(String imagePath) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
         imagen1 = bufferedImage;
@@ -63,7 +64,7 @@ public class RompeCabezas{
             for (int j = 0; j < 3; j++){
                 Image image = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(imagen1.getSource(),
                     new CropImageFilter(j * (width / 3), i * (height / 3), width / 3, height / 3)));
-                Pieza p = new Pieza(image, j * (width / 3), i * (height / 3));
+                Pieza p = new Pieza(image, j * (width / 3), i * (height / 3), height / 3, width / 3);
                 piezasList.add(p);
             }
         }
@@ -83,9 +84,7 @@ public class RompeCabezas{
             piezas.add(parcial);
         }
     }
-
-    
-    /*
+ /*    
     public void cargarImagen(String imagePath) throws IOException{
         imagen1 = ImageIO.read(new File(imagePath));
         width = imagen1.getWidth(null);
@@ -96,20 +95,38 @@ public class RompeCabezas{
             for (int j = 0; j  < 3; j++){
                 Image image = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(imagen1.getSource(),
                     new CropImageFilter(j * (width / 3), i * (height / 3) , width / 3, height / 3)));
-                Pieza p = new Pieza(image, j*(width/3), i * (height / 3));
+                Pieza p = new Pieza(image, j*(width/3), i * (height / 3), height / 3, width / 3);
                 parcial.add(p);
             }
             getPiezas().add(parcial);
         }
 
     }
-    */
-    
+ */   
     public void desordenarPiezas() {
         for (ArrayList<Pieza> fila : piezas) {
             Collections.shuffle(fila);
         }
         Collections.shuffle(piezas);
+    }
+    
+    public Pieza checkHitPieza (int x, int y){
+      for(ArrayList<Pieza> piezas : piezas){      
+            for(Pieza pieza : piezas){
+                if(pieza.checkHit(x, y)){
+                    return pieza;
+                }
+            }
+      }
+            return null;
+    }
+    
+    public boolean mouseClickeado(MouseEvent evt){
+        Pieza hit = checkHitPieza(evt.getX(), evt.getY());
+        if(hit != null && hit instanceof Pieza){
+            return true;
+        }
+        return false;
     }
     
     public int calcularPuntajeTotal(){
@@ -126,6 +143,11 @@ public class RompeCabezas{
         }
         
         return puntajeT;
+    }
+    
+    public void MostrarDatos(){
+        //BufferedWriter writer= new BufferedWriter()
+        
     }
 
     /**

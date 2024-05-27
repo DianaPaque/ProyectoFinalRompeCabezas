@@ -6,49 +6,79 @@ package presentacion;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import modelos.Pieza;
 import rompecabezas.RompeCabezas;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-/**
- *
- * @author usuario
- */
-public class Panel extends JPanel implements KeyListener{
+public class Panel extends JPanel {
 
     private BufferedImage imagenPrincipal;
-    private int width, height;
-    //private ArrayList<ArrayList<Pieza>> piezas;
+    private int width;
+    private int height;
     private BufferedImage imagen1;
     private String imagePath;
     private boolean listo = false;
     private RompeCabezas rompecabezas;
-    private Pieza piezaSeleccionada;
+    private Pieza selectedPieza;
+    private int selectedX, selectedY;
 
     public Panel() {
-        addKeyListener(this);
-        setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
-        addMouseListener(new MouseAdapter(){
+        addMouseListener(new MouseAdapter() {
             @Override
-                public void mouseClicked(MouseEvent e){
-                    int x = e.getX();
-                    int y = e.getY();
-                    Pieza pieza = getPiezaEn(x, y);
-                    if(pieza != null){
-                        setPiezaSeleccionada(pieza);
+            public void mouseClicked(MouseEvent e) {
+                if (listo) {
+                    int mouseX = e.getX();
+                    int mouseY = e.getY();
+                    if (selectedPieza == null) {
+                        selectedPieza = getPiezaEn(mouseX, mouseY);
+                        if (selectedPieza != null) {
+                            selectedX = selectedPieza.getPosx();
+                            selectedY = selectedPieza.getPosy();
+                            System.out.println("Pieza seleccionada en la posición del clic: (" + mouseX + ", " + mouseY + ")");
+                        }
+                    } else {
+                        Pieza targetPieza = getPiezaEn(mouseX, mouseY);
+                        if (targetPieza != null) {
+                            intercambiarPiezas(selectedPieza, targetPieza);
+                            selectedPieza = null; // Deseleccionar la pieza después de intercambiar
+                        }
                     }
                 }
+            }
         });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (selectedPieza != null && listo) {
+                    int keyCode = e.getKeyCode();
+                    switch (keyCode) {
+                        case KeyEvent.VK_UP:
+                            movePieza(0, -1);
+                            break;
+                        case KeyEvent.VK_DOWN:
+                            movePieza(0, 1);
+                            break;
+                        case KeyEvent.VK_LEFT:
+                            movePieza(-1, 0);
+                            break;
+                        case KeyEvent.VK_RIGHT:
+                            movePieza(1, 0);
+                            break;
+                    }
+                }
+            }
+        });
+
+        setFocusable(true);
+        requestFocusInWindow();
     }
 
     public String getImagePath() {
@@ -61,127 +91,59 @@ public class Panel extends JPanel implements KeyListener{
         this.rompecabezas.cargarImagen(imagePath);
         this.rompecabezas.desordenarPiezas();
         this.listo = true;
+        this.width = this.getWidth();
+        this.height = this.getHeight();
         repaint();
     }
-    
-    
+
     public BufferedImage convertUsingConstructor(Image image) throws IllegalArgumentException {
-    int width = image.getWidth(null);
-    int height = image.getHeight(null);
-    if (width <= 0 || height <= 0) {
-        throw new IllegalArgumentException("Image dimensions are invalid");
-    }
-    BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-    bufferedImage.getGraphics().drawImage(image, 0, 0, null);
-    return bufferedImage;
-}
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        if (listo) {
-            ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
-            int a;
-            int b;
-            for (int i = 0; i < piezas.size(); i++) {
-                for (int j = 0; j < piezas.get(i).size(); j++) {
-                    Pieza pieza = piezas.get(i).get(j);
-                    
-                    BufferedImage img = convertUsingConstructor(pieza.getImage());
-
-                    int x = pieza.getX();
-                    int y = pieza.getY();
-                            
-  //                   if(j % 9 == 0)
-                      g.drawImage(img, x, y, this);
-                      System.out.println(j);
-                }
-                System.out.println(i);
-            }
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Image dimensions are invalid");
         }
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        bufferedImage.getGraphics().drawImage(image, 0, 0, null);
+        return bufferedImage;
     }
-    
-    public void move(int code) {
-        if (piezaSeleccionada != null) {
-            int x = piezaSeleccionada.getPosx();
-            int y = piezaSeleccionada.getPosy();
 
-            switch (code) {
-                case KeyEvent.VK_UP:
-                    if (y > 0) {
-                        movePieza(x, y, x, y - 1);
-                    }
-                    break;
-                case KeyEvent.VK_DOWN:
-                    if (y < rompecabezas.getPiezas().size() - 1) {
-                        movePieza(x, y, x, y + 1);
-                    }
-                    break;
-                case KeyEvent.VK_LEFT:
-                    if (x > 0) {
-                        movePieza(x, y, x - 1, y);
-                    }
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    if (x < rompecabezas.getPiezas().get(0).size() - 1) {
-                        movePieza(x, y, x + 1, y);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
- 
-    // las piezas se guardan en un mismo array, más sin embargo se manejan arriba 2, para x y y
-    // arreglar
-    
-    private void movePieza(int x, int y, int newX, int newY) {
-    ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
-
-    if (isValidMove(newX, newY, piezas.get(0).size(), piezas.size())) {
-        Pieza temp = piezas.get(y).get(x);
-        piezas.get(y).set(x, piezas.get(newY).get(newX));
-        piezas.get(newY).set(newX, temp);
-
-        temp.setPosx(newX);
-        temp.setPosy(newY);
-
-        repaint();
-    }
-}
-    
-    /*private void movePieza(int x, int y, int newX, int newY) {
+    private void movePieza(int dx, int dy) {
         ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+        int x = selectedX / (width / piezas.get(0).size());
+        int y = selectedY / (height / piezas.size());
+        int newX = x + dx;
+        int newY = y + dy;
 
-        if (isValidMove(newX, newY, piezas.size(), piezas.get(0).size())) {
-            Pieza temp = piezas.get(y).get(x);
-            piezas.get(x).set(x, piezas.get(newY).get(newX));
-            piezas.get(newY).set(newX, temp);
-
-            piezas.get(y).get(x).setPosx(x);
-            piezas.get(y).get(x).setPosy(y);
-            piezas.get(newY).get(newX).setPosx(newX);
-            piezas.get(newY).get(newX).setPosy(newY);
-
+        if (isValidMove(newX, newY, piezas.get(0).size(), piezas.size())) {
+            selectedX = newX * (width / piezas.get(0).size());
+            selectedY = newY * (height / piezas.size());
+            selectedPieza.setPosx(selectedX);
+            selectedPieza.setPosy(selectedY);
             repaint();
         }
-    }*/
-
-// Helper method to check if a new position is valid
-    private boolean isValidMove(int newX, int newY, int puzzleWidth, int puzzleHeight) {
-        return newX >= 0 && newX < puzzleWidth && newY >= 0 && newY < puzzleHeight;
     }
-    
+
+    private void intercambiarPiezas(Pieza pieza1, Pieza pieza2) {
+        int tempX = pieza1.getPosx();
+        int tempY = pieza1.getPosy();
+
+        pieza1.setPosx(pieza2.getPosx());
+        pieza1.setPosy(pieza2.getPosy());
+
+        pieza2.setPosx(tempX);
+        pieza2.setPosy(tempY);
+
+        repaint();
+    }
+
     private Pieza getPiezaEn(int x, int y) {
         ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+        int piezaWidth = width / piezas.get(0).size();
+        int piezaHeight = height / piezas.size();
         for (ArrayList<Pieza> fila : piezas) {
             for (Pieza pieza : fila) {
-                int piezaX = pieza.getX();
-                int piezaY = pieza.getY();
-                int piezaWidth = pieza.getImage().getWidth(this) / piezas.size();
-                int piezaHeight = pieza.getImage().getHeight(this) / piezas.get(0).size();
+                int piezaX = pieza.getPosx();
+                int piezaY = pieza.getPosy();
                 if (x >= piezaX && x < piezaX + piezaWidth && y >= piezaY && y < piezaY + piezaHeight) {
                     return pieza;
                 }
@@ -190,27 +152,24 @@ public class Panel extends JPanel implements KeyListener{
         return null;
     }
 
-    /**
-     * @param piezaSeleccionada the piezaSeleccionada to set
-     */
-    public void setPiezaSeleccionada(Pieza piezaSeleccionada) {
-        this.piezaSeleccionada = piezaSeleccionada;
-    }
-    
     @Override
-    public void keyPressed(KeyEvent e) {
-        // Maneja los eventos de presionar teclas aquí
-        int code = e.getKeyCode();
-        move(code);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // Maneja los eventos de soltar teclas aquí
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (listo) {
+            ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+            for (int i = 0; i < piezas.size(); i++) {
+                for (int j = 0; j < piezas.get(i).size(); j++) {
+                    Pieza pieza = piezas.get(i).get(j);
+                    BufferedImage img = convertUsingConstructor(pieza.getImage());
+                    int x = pieza.getPosx();
+                    int y = pieza.getPosy();
+                    g.drawImage(img, x, y, this);
+                }
+            }
+        }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // Maneja los eventos de escribir teclas aquí
+    private boolean isValidMove(int newX, int newY, int maxCols, int maxRows) {
+        return newX >= 0 && newX < maxCols && newY >= 0 && newY < maxRows;
     }
 }
