@@ -27,19 +27,39 @@ public class Pieza {
     private int posx;
     private int posy;
     private Image image;
-    private int height;
-    private int width;
+    private int posOriginalX;
+    private int posOriginalY;
 
-    public Pieza(Image image, int posx, int posy, int height, int width) {
+    public Pieza(Image image, int posx, int posy) {
+        this.image = image;
         this.posx = posx;
         this.posy = posy;
-        this.image = image;
-        this.height = height;
-        this.width = width;
+        this.posOriginalX = posx;
+        this.posOriginalY = posy;
+        
+    }
+    
+    public void move(int code){
+        if(code == KeyEvent.VK_UP){
+            move(UP);
+        }
+        if(code == KeyEvent.VK_DOWN){
+            move(DOWN);
+        }
+        if(code == KeyEvent.VK_RIGHT){
+            move(RIGHT);
+        }
+        if(code == KeyEvent.VK_LEFT){
+            move(LEFT);
+        }
     }
     
     public void draw(Graphics g){
         g.drawImage(image, posx, posy, null, null);
+    }
+
+    private void move(String RIGHT) {
+        
     }
 
     /**
@@ -70,45 +90,21 @@ public class Pieza {
     public int getY() {
         return posy;
     }
-
-    /**
-     * @param posx the posx to set
-     */
+    
     public void setPosx(int posx) {
         this.posx = posx;
     }
 
-    /**
-     * @param posy the posy to set
-     */
     public void setPosy(int posy) {
         this.posy = posy;
     }
-    
-     /**
-     * @return the height
-     */
-    public int getHeight() {
-        return height;
+
+    public int getPosOriginalX() {
+        return posOriginalX;
     }
 
-    /**
-     * @return the widht
-     */
-    public int getWidth() {
-        return width;
+    public int getPosOriginalY() {
+        return posOriginalY;
     }
     
-    public void move(){
-        
-    }
-    
-    public void rotar(){
-        
-    }
-    
-    public boolean checkHit(int x, int y) {
-        return x >= this.getX() && x <= this.getX() + this.getWidth() && y >= this.getY() && y <= this.getY() + this.getHeight();
-    }
-
 }

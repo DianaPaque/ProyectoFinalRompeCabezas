@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package presentacion;
 
 import java.awt.Graphics;
@@ -13,11 +9,12 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelos.Pieza;
 import rompecabezas.RompeCabezas;
 
-public class Panel extends JPanel {
+public class Tablero extends JPanel {
 
     private BufferedImage imagenPrincipal;
     private int width;
@@ -29,7 +26,7 @@ public class Panel extends JPanel {
     private Pieza selectedPieza;
     private int selectedX, selectedY;
 
-    public Panel() {
+    public Tablero() {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -41,13 +38,13 @@ public class Panel extends JPanel {
                         if (selectedPieza != null) {
                             selectedX = selectedPieza.getPosx();
                             selectedY = selectedPieza.getPosy();
-                            System.out.println("Pieza seleccionada en la posición del clic: (" + mouseX + ", " + mouseY + ")");
                         }
-                    } else {
+                    } 
+                    else {
                         Pieza targetPieza = getPiezaEn(mouseX, mouseY);
                         if (targetPieza != null) {
                             intercambiarPiezas(selectedPieza, targetPieza);
-                            selectedPieza = null; // Deseleccionar la pieza después de intercambiar
+                            selectedPieza = null; 
                         }
                     }
                 }
@@ -120,7 +117,20 @@ public class Panel extends JPanel {
             selectedPieza.setPosx(selectedX);
             selectedPieza.setPosy(selectedY);
             repaint();
+            
         }
+    }
+    
+    public boolean verificarGanador(){
+       ArrayList<ArrayList<Pieza>> piezas = this.rompecabezas.getPiezas();
+       for( ArrayList<Pieza> filapiezas : piezas) {
+           for(Pieza p : filapiezas){
+              if( p.getPosOriginalX()!= p.getPosx()|| p.getPosOriginalY() != p.getPosy()){
+                 return false; 
+              }
+           }
+       }
+       return true;
     }
 
     private void intercambiarPiezas(Pieza pieza1, Pieza pieza2) {
@@ -134,6 +144,7 @@ public class Panel extends JPanel {
         pieza2.setPosy(tempY);
 
         repaint();
+        
     }
 
     private Pieza getPiezaEn(int x, int y) {

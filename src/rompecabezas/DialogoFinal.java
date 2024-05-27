@@ -4,6 +4,10 @@
  */
 package rompecabezas;
 
+import java.awt.Dialog;
+import modelos.Puntaje;
+import modelos.Tiempo;
+
 /**
  *
  * @author usuario
@@ -13,9 +17,12 @@ public class DialogoFinal extends javax.swing.JDialog {
     /**
      * Creates new form DialogoFinal
      */
-    public DialogoFinal(java.awt.Dialog parent, boolean modal) {
+    public DialogoFinal(Dialog parent, boolean modal, Tiempo tiempo) {
         super(parent, modal);
         initComponents();
+        this.tTiempo.setText(tiempo.obtenerTiempoFormateado());
+        Puntaje p = new Puntaje(tiempo);
+        this.tPuntaje.setText("" + p.calcularPuntajeActual());
     }
 
     /**

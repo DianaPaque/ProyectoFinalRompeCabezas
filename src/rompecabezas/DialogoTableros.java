@@ -25,7 +25,7 @@ public class DialogoTableros extends javax.swing.JDialog {
     private String imagen;
     private Tiempo tiempo;
     private Puntaje puntaje;
-    private JLabel tTiempoLabel ;
+    private JLabel tTiempoLabel;
 
     public DialogoTableros(java.awt.Dialog parent, boolean modal, String nombre, Color color, String imagen, Font fuente) {
         super(parent, modal);
@@ -80,10 +80,9 @@ public class DialogoTableros extends javax.swing.JDialog {
         tTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tPuntaje = new javax.swing.JTextField();
         bContinuar = new javax.swing.JButton();
         bAtras = new javax.swing.JButton();
-        panelRompe = new presentacion.Panel();
+        panelRompe = new presentacion.Tablero();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,7 +104,6 @@ public class DialogoTableros extends javax.swing.JDialog {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Puntaje:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
-        jPanel2.add(tPuntaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, -1, -1));
 
         bContinuar.setBackground(new java.awt.Color(102, 102, 255));
         bContinuar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
@@ -116,7 +114,7 @@ public class DialogoTableros extends javax.swing.JDialog {
                 bContinuarActionPerformed(evt);
             }
         });
-        jPanel2.add(bContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
+        jPanel2.add(bContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, -1));
 
         bAtras.setBackground(new java.awt.Color(102, 102, 255));
         bAtras.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
@@ -133,14 +131,14 @@ public class DialogoTableros extends javax.swing.JDialog {
         panelRompe.setLayout(panelRompeLayout);
         panelRompeLayout.setHorizontalGroup(
             panelRompeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         panelRompeLayout.setVerticalGroup(
             panelRompeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 230, Short.MAX_VALUE)
         );
 
-        jPanel2.add(panelRompe, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 520, 230));
+        jPanel2.add(panelRompe, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 480, 230));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,8 +161,11 @@ public class DialogoTableros extends javax.swing.JDialog {
 
     private void bContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bContinuarActionPerformed
         // TODO add your handling code here:
-        DialogoFinal df = new DialogoFinal(this, true);
-        df.setVisible(true);
+        if(panelRompe.verificarGanador()){
+            this.tiempo.pausar();
+            DialogoFinal df = new DialogoFinal(null, true, tiempo);
+            df.setVisible(true);
+        }
     }//GEN-LAST:event_bContinuarActionPerformed
 
 
@@ -175,8 +176,7 @@ public class DialogoTableros extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
-    private presentacion.Panel panelRompe;
-    private javax.swing.JTextField tPuntaje;
+    private presentacion.Tablero panelRompe;
     private javax.swing.JLabel tTitulo;
     // End of variables declaration//GEN-END:variables
 }
