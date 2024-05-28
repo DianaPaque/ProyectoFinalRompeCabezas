@@ -14,7 +14,7 @@ public class Puntaje {
     private int puntajeActual;
     private JLabel label;
 
-    public Puntaje(Tiempo tiempo) {
+    public Puntaje(Tiempo tiempo, JLabel jLabel) {
         this.puntajeActual = 0;
     }
 
@@ -41,4 +41,6 @@ public class Puntaje {
         
         return (int) puntajeActual;
     }
+    
+    
 }
