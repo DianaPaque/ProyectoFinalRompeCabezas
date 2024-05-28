@@ -29,10 +29,16 @@ public class Puntaje {
         
         Tiempo t = new Tiempo(label);
         
-        if(t.obtenerTiempo() <= 60){
+        if(t.obtenerTiempo() > 0 && t.obtenerTiempo() <= 30){
+            this.puntajeActual += 200;
+        }
+        else if(t.obtenerTiempo() > 30 && t.obtenerTiempo() <= 60){
+            this.puntajeActual += 150;
+        }
+        else if(t.obtenerTiempo() > 60 && t.obtenerTiempo() <= 90){
             this.puntajeActual += 100;
         }
-        else if(t.obtenerTiempo() > 60 && t.obtenerTiempo() < 120){
+        else if(t.obtenerTiempo() > 90 && t.obtenerTiempo() <= 120){
             this.puntajeActual += 50;
         }
         else{
