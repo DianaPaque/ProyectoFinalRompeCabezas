@@ -82,10 +82,10 @@ public class Tablero extends JPanel {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) throws IOException {
+    public void setImagePath(String imagePath, int divisiones) throws IOException {
         this.imagePath = imagePath;
         this.rompecabezas = new RompeCabezas();
-        this.rompecabezas.cargarImagen(imagePath);
+        this.rompecabezas.cargarImagen(imagePath, divisiones);
         this.rompecabezas.desordenarPiezas();
         this.listo = true;
         this.width = this.getWidth();

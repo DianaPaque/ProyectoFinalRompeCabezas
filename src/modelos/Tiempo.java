@@ -27,9 +27,6 @@ public class Tiempo {
         corriendo = true;
         if (!hilo.isAlive()) {
             hilo.start();
-            System.out.println("Hilo del cronómetro iniciado.");
-        } else {
-            System.out.println("El hilo del cronómetro ya está en ejecución.");
         }
         return true;
     }

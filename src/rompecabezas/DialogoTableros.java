@@ -27,10 +27,10 @@ public class DialogoTableros extends javax.swing.JDialog {
     private Puntaje puntaje;
     private JLabel tTiempoLabel;
 
-    public DialogoTableros(java.awt.Dialog parent, boolean modal, String nombre, Color color, String imagen, Font fuente) {
+    public DialogoTableros(java.awt.Dialog parent, boolean modal, String nombre, Color color, String imagen, Font fuente, int divisiones) {
         super(parent, modal);
         initComponents();
-        crearPanel(imagen);
+        crearPanel(imagen, divisiones);
         System.out.println(imagen);
         this.nombre = nombre;
         this.color = color;
@@ -44,24 +44,10 @@ public class DialogoTableros extends javax.swing.JDialog {
         puntaje = new Puntaje(tiempo);
     }
     
-    
-    
-    /**
-     * Creates new form DialogoPixarGeneral
-     */
-    
-    /*
-    public DialogoTableros(java.awt.Dialog parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        crearPanel();
-    }
-    */
-    
-    public void crearPanel(String imagen){
+    public void crearPanel(String imagen, int divisiones){
         try {
             // this.panelRompe.setImagePath("src\\imagenesTableros\\IDisney\\DisneyT1.jpg");
-            this.panelRompe.setImagePath(imagen);
+            this.panelRompe.setImagePath(imagen, divisiones);
         } catch (IOException ex) {
             Logger.getLogger(DialogoTableros.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,7 +65,6 @@ public class DialogoTableros extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         tTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         bContinuar = new javax.swing.JButton();
         bAtras = new javax.swing.JButton();
         panelRompe = new presentacion.Tablero();
@@ -98,12 +83,7 @@ public class DialogoTableros extends javax.swing.JDialog {
         jLabel2.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tiempo:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Puntaje:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, 30));
 
         bContinuar.setBackground(new java.awt.Color(102, 102, 255));
         bContinuar.setFont(new java.awt.Font("Rockwell Extra Bold", 0, 14)); // NOI18N
@@ -174,7 +154,6 @@ public class DialogoTableros extends javax.swing.JDialog {
     private javax.swing.JButton bAtras;
     private javax.swing.JButton bContinuar;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private presentacion.Tablero panelRompe;
     private javax.swing.JLabel tTitulo;

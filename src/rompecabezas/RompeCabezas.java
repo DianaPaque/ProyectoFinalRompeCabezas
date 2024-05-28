@@ -1,84 +1,70 @@
 package rompecabezas;
 
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import modelos.Tiempo;
-import modelos.Puntaje;
-import java.util.ArrayList;
-import modelos.Pieza;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
-/**
- *
- * @author usuario
- */
+import modelos.Pieza;
 
 public class RompeCabezas {
-    private Tiempo tiempoJuego;
-    private int puntajeT;
+    private BufferedImage imagen;
+    private int width, height;
     private ArrayList<ArrayList<Pieza>> piezas;
     private ArrayList<ArrayList<Pieza>> disposicionOriginal;
-    private ArrayList<Puntaje> puntaje1;
-    private BufferedImage imagen1;
-    private int width, height;
 
     public RompeCabezas() {
-        this.tiempoJuego = tiempoJuego;
-        this.puntajeT = 0;
-        this.piezas = new ArrayList<ArrayList<Pieza>>();
-         this.disposicionOriginal = new ArrayList<>();
-        this.puntaje1 = new ArrayList<>();
-        this.imagen1 = imagen1;
-        this.width = width;
-        this.height = height;
+        this.piezas = new ArrayList<>();
+        this.disposicionOriginal = new ArrayList<>();
     }
 
-    public boolean iniciarJuego() {
-        return true;
-    }
+    public void cargarImagen(String imagePath, int nivel) throws IOException {
+    piezas.clear(); // Limpiar la lista antes de cargar la imagen
+    disposicionOriginal.clear(); // Limpiar la lista antes de cargar la imagen
 
-    public boolean resolverRompecabezas() {
-        return true;
-    }
+    imagen = ImageIO.read(new File(imagePath));
+    width = imagen.getWidth();
+    height = imagen.getHeight();
 
-    public void cargarImagen(String imagePath) throws IOException {
-    imagen1 = ImageIO.read(new File(imagePath));
-    width = imagen1.getWidth(null);
-    height = imagen1.getHeight(null);
+    int divisiones;
+    if (imagePath.contains("IDisney")) {
+        divisiones = 3; // Disney -> 3x3
+    } else if (imagePath.contains("IMarvel")) {
+        divisiones = 4; // Marvel -> 4x4
+    } else if (imagePath.contains("IPixar")) {
+        divisiones = 5; // Pixar -> 5x5
+    } else {
+        // Por defecto, si no se reconoce el tipo de imagen, se utilizará 3 divisiones
+        divisiones = 3;
+    }
 
     ArrayList<Pieza> piezasList = new ArrayList<>();
-    disposicionOriginal = new ArrayList<>();
 
-    for(int i = 0; i < 3; i++){
-        ArrayList<Pieza> parcialOriginal = new ArrayList<>();
-        for (int j = 0; j < 3; j++){
-            Image image = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(imagen1.getSource(),
-                new CropImageFilter(j * (width / 3), i * (height / 3), width / 3, height / 3)));
-            Pieza p = new Pieza(image, j * (width / 3), i * (height / 3));
-            piezasList.add(p);
-            parcialOriginal.add(p);
+    for (int i = 0; i < divisiones; i++) {
+        for (int j = 0; j < divisiones; j++) {
+            Image imagenPieza = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(
+                    imagen.getSource(), new CropImageFilter(j * (width / divisiones), i * (height / divisiones),
+                            width / divisiones, height / divisiones)));
+            Pieza pieza = new Pieza(imagenPieza, j * (width / divisiones), i * (height / divisiones));
+            piezasList.add(pieza);
         }
-        disposicionOriginal.add(parcialOriginal);
     }
 
     Collections.shuffle(piezasList);
 
+    piezas = new ArrayList<>();
     int index = 0;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < divisiones; i++) {
         ArrayList<Pieza> parcial = new ArrayList<>();
-        for (int j = 0; j < 3; j++) {
+        for (int j = 0; j < divisiones; j++) {
             Pieza p = piezasList.get(index);
-            p.setPosx(j * (width / 3));
-            p.setPosy(i * (height / 3));
+            p.setPosx(j * (width / divisiones));
+            p.setPosy(i * (height / divisiones));
             parcial.add(p);
             index++;
         }
@@ -87,29 +73,41 @@ public class RompeCabezas {
 }
 
     public void desordenarPiezas() {
+        if (piezas.isEmpty()) {
+            System.err.println("Error: La lista de piezas está vacía. Debe cargar una imagen primero.");
+            return;
+        }
+        
         for (ArrayList<Pieza> fila : piezas) {
             Collections.shuffle(fila);
         }
         Collections.shuffle(piezas);
     }
 
-    public int calcularPuntajeTotal() {
-        for(int i = 0; i < 3; i++){
-            Tiempo tiempo = null;
-            Puntaje p = new Puntaje(tiempo);
-            p.calcularPuntajeActual();
-            puntaje1.add(p);
-        }
-
-        for(int i = 0; i < puntaje1.size(); i++){
-            this.puntajeT += (int)(puntaje1.get(i).calcularPuntajeActual());
-        }
-
-        return puntajeT;
+    // Otros métodos según necesidades adicionales
+    
+    // Getter para obtener la imagen
+    public BufferedImage getImagen() {
+        return imagen;
     }
 
+    // Getter para obtener el ancho de la imagen
+    public int getWidth() {
+        return width;
+    }
+
+    // Getter para obtener la altura de la imagen
+    public int getHeight() {
+        return height;
+    }
+
+    // Getter para obtener las piezas
     public ArrayList<ArrayList<Pieza>> getPiezas() {
         return piezas;
     }
 
+    // Getter para obtener la disposición original de las piezas
+    public ArrayList<ArrayList<Pieza>> getDisposicionOriginal() {
+        return disposicionOriginal;
+    }
 }

@@ -115,21 +115,21 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
     private void bDisneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDisneyActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoTableros d1 = new DialogoTableros(this, true, "Disney", new Color(204, 204, 255), "src\\imagenesTableros\\IDisney\\DisneyT1.jpg", new Font("Snap ITC", 0, 48));
+        DialogoTableros d1 = new DialogoTableros(this, true, "Disney", new Color(204, 204, 255), "src\\imagenesTableros\\IDisney\\DisneyT1.jpg", new Font("Snap ITC", 0, 48), 3);
         d1.setVisible(true);
     }//GEN-LAST:event_bDisneyActionPerformed
 
     private void bMarvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMarvelActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT1.jpg", new Font("Showcard Gothic", 0, 48));
+        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT1.jpg", new Font("Showcard Gothic", 0, 48), 5);
         d2.setVisible(true);
     }//GEN-LAST:event_bMarvelActionPerformed
 
     private void bPixarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPixarActionPerformed
         // TODO add your handling code here:
         dispose();
-        DialogoTableros d3 = new DialogoTableros(this, true, "Pixar", new Color(204, 255, 204), "src\\imagenesTableros\\IPixar\\PixarT1.jpg", new Font("Cooper Black", 0, 48));
+        DialogoTableros d3 = new DialogoTableros(this, true, "Pixar", new Color(204, 255, 204), "src\\imagenesTableros\\IPixar\\PixarT1.jpg", new Font("Cooper Black", 0, 48), 4);
         d3.setVisible(true);
     }//GEN-LAST:event_bPixarActionPerformed
 
