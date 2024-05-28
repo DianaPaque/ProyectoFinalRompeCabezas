@@ -6,12 +6,17 @@ package rompecabezas;
 
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JOptionPane;
+import Sonido.audioJuego;
 
 /**
  *
  * @author usuario
  */
 public class DialogoRompeCabezas extends javax.swing.JDialog {
+    private boolean disneyCompletado = false;
+    private boolean marvelCompletado = false;
+    private audioJuego ajuego;
 
     /**
      * Creates new form DialogoRompeCabezas
@@ -19,6 +24,8 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
     public DialogoRompeCabezas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.ajuego = new audioJuego();
+        ajuego.getAudios();
     }
 
     /**
@@ -35,6 +42,9 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
         bDisney = new javax.swing.JButton();
         bPixar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -80,6 +90,21 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imgmarvel (1).jpg"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
+        jLabel8.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Nivel 3");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 70, 30));
+
+        jLabel6.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Nivel 2");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, 30));
+
+        jLabel7.setFont(new java.awt.Font("Showcard Gothic", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Nivel 1");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/imgPixar (1).jpg"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
@@ -104,9 +129,7 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -114,23 +137,37 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
 
     private void bDisneyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDisneyActionPerformed
         // TODO add your handling code here:
-        dispose();
+        ajuego.playJuego();
         DialogoTableros d1 = new DialogoTableros(this, true, "Disney", new Color(204, 204, 255), "src\\imagenesTableros\\IDisney\\DisneyT1.jpg", new Font("Snap ITC", 0, 48), 3);
         d1.setVisible(true);
+        disneyCompletado = true;
     }//GEN-LAST:event_bDisneyActionPerformed
 
     private void bMarvelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMarvelActionPerformed
         // TODO add your handling code here:
-        dispose();
-        DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT1.jpg", new Font("Showcard Gothic", 0, 48), 5);
-        d2.setVisible(true);
+        ajuego.playJuego();
+        if(disneyCompletado){
+            DialogoTableros d2 = new DialogoTableros(this, true, "Marvel", new Color(255, 102, 102), "src\\imagenesTableros\\IMarvel\\MarvelT3.jpg", new Font("Showcard Gothic", 0, 48), 5);
+            d2.setVisible(true);
+            marvelCompletado = true;
+      }
+      else{
+          DialogoError de = new DialogoError(this, true);
+          de.setVisible(true);
+      }
     }//GEN-LAST:event_bMarvelActionPerformed
 
     private void bPixarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPixarActionPerformed
         // TODO add your handling code here:
-        dispose();
-        DialogoTableros d3 = new DialogoTableros(this, true, "Pixar", new Color(204, 255, 204), "src\\imagenesTableros\\IPixar\\PixarT1.jpg", new Font("Cooper Black", 0, 48), 4);
-        d3.setVisible(true);
+        ajuego.playJuego();
+        if(disneyCompletado && marvelCompletado){
+            DialogoTableros d3 = new DialogoTableros(this, true, "Pixar", new Color(204, 255, 204), "src\\imagenesTableros\\IPixar\\PixarT1.jpg", new Font("Cooper Black", 0, 48), 4);
+            d3.setVisible(true);
+      }
+      else{
+          DialogoError de = new DialogoError(this, true);
+          de.setVisible(true);
+      }
     }//GEN-LAST:event_bPixarActionPerformed
 
 
@@ -143,6 +180,9 @@ public class DialogoRompeCabezas extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,11 +15,8 @@ import modelos.Pieza;
 import rompecabezas.RompeCabezas;
 
 public class Tablero extends JPanel {
-
-    private BufferedImage imagenPrincipal;
     private int width;
     private int height;
-    private BufferedImage imagen1;
     private String imagePath;
     private boolean listo = false;
     private RompeCabezas rompecabezas;

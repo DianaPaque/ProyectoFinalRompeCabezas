@@ -5,6 +5,10 @@
 package rompecabezas;
 
 import java.awt.Dialog;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JLabel;
 import modelos.Puntaje;
 import modelos.Tiempo;
 
@@ -13,6 +17,9 @@ import modelos.Tiempo;
  * @author usuario
  */
 public class DialogoFinal extends javax.swing.JDialog {
+    private Tiempo tiempo;
+    private int puntaje;
+    private Puntaje p;
 
     /**
      * Creates new form DialogoFinal
@@ -21,8 +28,23 @@ public class DialogoFinal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.tTiempo.setText(tiempo.obtenerTiempoFormateado());
-        Puntaje p = new Puntaje(tiempo);
+        Puntaje p = new Puntaje(tiempo, new JLabel());
         this.tPuntaje.setText("" + p.calcularPuntajeActual());
+        p = new Puntaje(tiempo, new JLabel());  
+        p.calcularPuntajeActual();  
+        this.tPuntaje.setText("" + p.getPuntajeActual());  
+       guardarDatos();
+    }
+    
+     public void guardarDatos() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("puntajes.txt", true))) { 
+            writer.newLine();
+            writer.write("Tiempo: " + tTiempo.getText());
+            writer.write(" ");
+            writer.write("Puntaje: " + tPuntaje.getText());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -105,7 +127,7 @@ public class DialogoFinal extends javax.swing.JDialog {
 
     private void bFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_bFinalizarActionPerformed
 
     private void bReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bReiniciarActionPerformed

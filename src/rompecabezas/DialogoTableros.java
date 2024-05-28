@@ -41,7 +41,7 @@ public class DialogoTableros extends javax.swing.JDialog {
         jPanel2.add(tTiempoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 50, -1));
         tiempo = new Tiempo(tTiempoLabel);
         tiempo.iniciar();
-        puntaje = new Puntaje(tiempo);
+        puntaje = new Puntaje(tiempo, new JLabel());
     }
     
     public void crearPanel(String imagen, int divisiones){
